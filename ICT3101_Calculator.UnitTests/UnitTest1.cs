@@ -19,19 +19,19 @@ namespace ICT3101_Calculator.UnitTests
             // Assert
             Assert.That(result, Is.EqualTo(30));
         }
-        [Test]
-        public void Divide_WithNegativeInputs_ResultThrowArgumentException()
-        {
-            Assert.That(() => _calculator.Divide(0, 0), Throws.ArgumentException);
-        }
-        [Test]
-        [TestCase(0, 0)]
-        [TestCase(0, 10)]
-        [TestCase(10, 0)]
-        public void Divide_WithZerosAsInputs_ResultThrowArgumentException(int a, int b)
-        {
-            Assert.That(() => _calculator.Divide(a,b), Throws.ArgumentException);
-        }
+        //[Test]
+        //public void Divide_WithNegativeInputs_ResultThrowArgumentException()
+        //{
+        //    Assert.That(() => _calculator.Divide(0, 0), Throws.ArgumentException);
+        //}
+        //[Test]
+        //[TestCase(0, 0)]
+        //[TestCase(0, 10)]
+        //[TestCase(10, 0)]
+        //public void Divide_WithZerosAsInputs_ResultThrowArgumentException(int a, int b)
+        //{
+        //    Assert.That(() => _calculator.Divide(a,b), Throws.ArgumentException);
+        //}
         [Test]
         [TestCase(-1, 0)]
         [TestCase(-2, 0)]
