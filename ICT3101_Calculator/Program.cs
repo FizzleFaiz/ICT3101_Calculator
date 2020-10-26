@@ -44,6 +44,7 @@ namespace ICT3101_Calculator
                 Console.WriteLine("\tf - Factorial (First number will be factorial, second number is ignored)");
                 Console.WriteLine("\tt - Area of Triangle");
                 Console.WriteLine("\tc - Area of Circle (Only first number will be taken, second number is ignored)");
+                Console.WriteLine("\tz - Magic Number");
                 Console.Write("Your option? ");
                 string op = Console.ReadLine();
                 try

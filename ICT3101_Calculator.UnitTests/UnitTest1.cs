@@ -5,11 +5,13 @@ namespace ICT3101_Calculator.UnitTests
     public class CalculatorTests
     {
         private Calculator _calculator;
+        private IFileReader _reader;
         [SetUp]
         public void Setup()
         {
             // Arrange
             _calculator = new Calculator();
+            _reader = new FileReader();
         }
         [Test]
         public void Add_WhenAddingTwoNumbers_ResultEqualToSum()
@@ -90,6 +92,13 @@ namespace ICT3101_Calculator.UnitTests
         public void Circle_WithZerosAsInputs_ResultThrowArgumentException(int a, int b)
         {
             Assert.That(() => _calculator.Circle(a, b), Throws.ArgumentException);
+        }
+        [Test]
+        [TestCase(2)]
+        public void GenMagicNum_WithNegativeInputs_ResultThrownArgumentException(double a)
+        {
+            double result = _calculator.GenMagicNum(a, _reader);
+            Assert.That(result, Is.EqualTo(691042));
         }
     }
 }

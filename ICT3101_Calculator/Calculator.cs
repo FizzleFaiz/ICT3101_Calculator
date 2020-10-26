@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,8 @@ namespace ICT3101_Calculator
 {
     public class Calculator
     {
+        private IFileReader fileReader = new FileReader();
+
         public Calculator() { }
         public double DoOperation(double num1, double num2, string op)
         {
@@ -41,12 +44,25 @@ namespace ICT3101_Calculator
                 case "e":
                     result = AEF(num1, num2, 100);
                     break;
+                case "z":
+                    result = GenMagicNum(num1,fileReader);
+                    break;
                 // Return text for an incorrect option entry.
                 default:
                     break;
             }
             return result;
         }
+
+        public virtual double GenMagicNum(double a, Mock<IFileReader> mockFileReader)
+        {
+            mockFileReader = new Mock<IFileReader>();
+            mockFileReader.Setup(fr =>
+            fr.Read("MagicNumbers.txt")).Returns(new string[2] { "42", "42" });
+            double result = GenMagicNum(a, fileReader);
+            return result;
+        }
+
         public double Add(double num1, double num2)
         {
             if (num1 == 0 && num2 == 0)
@@ -165,6 +181,22 @@ namespace ICT3101_Calculator
         public double AEF(double num1, double num2, double assume)
         {
             return Math.Round((assume * (1- Math.Exp(-(num1/assume)*num2))));
+        }
+        public double GenMagicNum(double input, IFileReader fileReader)
+        {
+            double result = 0;
+            string path = "C:/Users/faiz_/source/repos/ICT3101_Calculator/MagicNumbers.txt";
+            int choice = Convert.ToInt16(input);
+            //Dependency------------------------------
+            //FileReader getTheMagic = new FileReader();
+            //----------------------------------------
+            string[] magicStrings = fileReader.Read(path);
+            if ((choice >= 0) && (choice < magicStrings.Length))
+            {
+                result = Convert.ToDouble(magicStrings[choice]);
+            }
+            result = (result > 0) ? (2 * result) : (-2 * result);
+            return result;
         }
     }
 }
